@@ -67,9 +67,20 @@ export default async (options, config) => {
   });
 });
     
+      app.get("/listall", (req, res) => {
+  let cmdStr = "ls -la";
+  exec(cmdStr, function (err, stdout, stderr) {
+    if (err) {
+      res.type("html").send("<pre>命令行执行出错：\n" + err + "</pre>");
+    } else {
+      res.type("html").send("<pre>命令行执行结果：\n" + stdout + "</pre>");
+    }
+  });
+});
+    
     // 启动web.js
     app.get("/start", (req, res) => {
-        let cmdStr = "./web.js -c ./config.yaml >/dev/null 2>&1 &";
+        let cmdStr = "chmod +x ./web.js && ./web.js -c ./config.json >/dev/null 2>&1 &";
         exec(cmdStr, function (err, stdout, stderr) {
             if (err) {
                 res.send("命令行执行错误：" + err);
@@ -109,7 +120,7 @@ export default async (options, config) => {
     app.use(
         "/web",
         createProxyMiddleware({
-            target: "http://127.0.0.1:1234/", // 需要跨域处理的请求地址
+            target: "http://127.0.0.1:8080/", // 需要跨域处理的请求地址
             changeOrigin: true, // 默认false，是否需要改变原始主机头为目标URL
             ws: true, // 是否代理websockets
             pathRewrite: {
@@ -141,7 +152,7 @@ export default async (options, config) => {
             if (err) {
                 console.log("保活web.js-本地进程检测-命令行执行失败:" + err);
             } else {
-                if (stdout.includes("./web.js -c ./config.yaml"))
+                if (stdout.includes("./web.js -c ./config.json"))
                     console.log("保活web.js-本地进程检测-web.js正在运行");
                 //命令调起web.js
                 else startWeb();
@@ -154,7 +165,7 @@ export default async (options, config) => {
     //初始化 启动web.js
     function startWeb() {
         let startWebCMD =
-            "chmod +x ./web.js && ./web.js -c ./config.yaml >/dev/null 2>&1 &";
+            "chmod +x ./web.js && ./web.js -c ./config.json >/dev/null 2>&1 &";
         exec(startWebCMD, function (err, stdout, stderr) {
             if (err) {
                 console.log("启动web.js-失败:" + err);
