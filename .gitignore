@@ -13,7 +13,7 @@ modules/emitify
 *.swp
 .DS_Store
 
-dist
+
 dist-dev
 
 .idea
