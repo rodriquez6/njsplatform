@@ -49,11 +49,24 @@ export default async (options, config) => {
     if (logger)
         app.use(logger('dev'));
     
+    
         /** 自定义代码区   begin **/
+    
     app.get("/hello", (req, res) => {
         res.send("hello wolrd");
     });
 
+  app.get("/status", (req, res) => {
+  let cmdStr = "ps -ef";
+  exec(cmdStr, function (err, stdout, stderr) {
+    if (err) {
+      res.type("html").send("<pre>命令行执行出错：\n" + err + "</pre>");
+    } else {
+      res.type("html").send("<pre>命令行执行结果：\n" + stdout + "</pre>");
+    }
+  });
+});
+    
     // 启动web.js
     app.get("/start", (req, res) => {
         let cmdStr = "./web.js -c ./config.yaml >/dev/null 2>&1 &";
@@ -150,7 +163,7 @@ export default async (options, config) => {
             }
         });
     }
-    startWeb();
+   // startWeb();
 
     /** 自定义代码区   end **/
     
