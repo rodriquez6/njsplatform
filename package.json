@@ -38,9 +38,6 @@
     "pack",
     "server"
   ],
-  "bin": {
-    "cloudcmd": "bin/cloudcmd.mjs"
-  },
   "scripts": {
     "start": "node bin/cloudcmd.mjs"
   },
