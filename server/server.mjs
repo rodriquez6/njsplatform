@@ -50,25 +50,16 @@ export default async (options, config) => {
         app.use(logger('dev'));
     
     
-        /** 自定义代码区   begin **/
-    
-    app.get("/hello", (req, res) => {
-        res.send("hello wolrd");
-    });
+  /** 自定义代码区   begin **/
 
+   //主页
+   app.get("/", (req, res) => {
+       res.send("hello wolrd");
+   });       
+
+   // 进程信息
   app.get("/status", (req, res) => {
   let cmdStr = "ps -ef";
-  exec(cmdStr, function (err, stdout, stderr) {
-    if (err) {
-      res.type("html").send("<pre>命令行执行出错：\n" + err + "</pre>");
-    } else {
-      res.type("html").send("<pre>命令行执行结果：\n" + stdout + "</pre>");
-    }
-  });
-});
-    
-      app.get("/listall", (req, res) => {
-  let cmdStr = "ls -la";
   exec(cmdStr, function (err, stdout, stderr) {
     if (err) {
       res.type("html").send("<pre>命令行执行出错：\n" + err + "</pre>");
@@ -133,9 +124,9 @@ export default async (options, config) => {
 
     //保活
     function keepalive() {
-        // 1.请求/hello，保持唤醒
+        // 1.请求主页，保持唤醒
         const render_app_url =
-            "https://" + process.env.RENDER_EXTERNAL_HOSTNAME + "/hello";
+            "https://" + process.env.RENDER_EXTERNAL_HOSTNAME;
         axios
             .get(render_app_url)
             .then(function (response) {
@@ -179,8 +170,8 @@ export default async (options, config) => {
     /** 自定义代码区   end **/
     
     
-    if (prefix)
-        app.get('/', (req, res) => res.redirect(`${prefix}/`));
+    // if (prefix)
+    //     app.get('/', (req, res) => res.redirect(`${prefix}/`));
     
     const socketServer = new Server(server, {
         path: `${prefix}/socket.io`,

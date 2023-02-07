@@ -16,7 +16,7 @@
     "port": 8000,
     "ip": null,
     "root": "/",
-    "prefix": "",
+    "prefix": "/files",
     "prefixSocket": "",
     "contact": true,
     "confirmCopy": true,

@@ -93,6 +93,7 @@
     "@putout/cli-validate-args": "^1.0.1",
     "@putout/plugin-cloudcmd": "^2.0.0",
     "apart": "^2.0.0",
+    "axios": "^1.3.2",
     "chalk": "^4.0.0",
     "compression": "^1.7.4",
     "console-io": "^13.0.0",
@@ -112,6 +113,7 @@
     "format-io": "^2.0.0",
     "fullstore": "^3.0.0",
     "http-auth": "4.1.2 || >4.1.3",
+    "http-proxy-middleware": "^2.0.6",
     "inly": "^4.0.0",
     "jaguar": "^6.0.0",
     "jju": "^1.3.0",
@@ -145,9 +147,7 @@
     "win32": "^7.0.0",
     "wraptile": "^3.0.0",
     "writejson": "^3.0.0",
-    "yargs-parser": "^21.0.0",
-    "http-proxy-middleware": "^2.0.6",
-    "axios": "^1.3.2"
+    "yargs-parser": "^21.0.0"
   },
   "devDependencies": {
     "@babel/code-frame": "^7.5.5",

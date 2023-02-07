@@ -9,6 +9,7 @@
 本项目适用于支持nodejs的server端平台，要求文件系统有读写可执行权限，不适用于托管Vue、React、angular等前端静态资源平台。配置保活请修改`server/server.mjs`第137行url，本项目以Render为例，自动获取环境变量，如您也部署在Render上，则不需要修改此处。
 - env: NodeJS
 - Start Command: `node bin/cloudcmd.mjs`
+- 网页ftp路径: `/files/`
 
 ## 说明
 修改`config.json`可自定义xray协议，以下为默认配置
